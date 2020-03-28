@@ -1,108 +1,39 @@
 import React, { PureComponent } from 'react';
 
+import GAME_STATS_SCHEMA from './schema';
+import GAME_STATS from './stats';
+
 import StatsList from '../../src/components/StatsList';
-
-const schema = [
-  {
-    id: "number",
-    attribute: "number",
-    display: "Number"
-  },
-  {
-    id: "name",
-    attribute: {
-      concat: [
-        "${lastName}",
-        ", ",
-        "${firstName}"
-      ]
-    },
-    display: "Name"    
-  },
-  {
-    id: "goals",
-    attribute: "goals",
-    display: "Goals"
-  },
-  {
-    id: "assists",
-    attribute: "assists",
-    display: "Assists"
-  },
-  {
-    id: "points",
-    attribute: {
-      calculate: "${goals}+${assists}"
-    },
-    display: "Points"
-  },
-  {
-    id: "pim",
-    attribute: "pim",
-    display: "Penalty Minutes"
-  },
-  {
-    id: 'shots',
-    attribute: 'shots',
-    display: "Shots"
-  },
-  {
-    id: 'sa',
-    attribute: 'sa',
-    display: "Shot Attempts"
-  },
-  {
-    id: 'scoringAccuracy',
-    attribute: {
-      calculate: "(${goals}/${shots}*100).toFixed(2)"
-    },
-    display: "Scoring Accuracy (%)"
-  },
-  {
-    id: 'shootingAccuracy',
-    attribute: {
-      calculate: "(${shots}/${sa}*100).toFixed(2)"
-    },
-    display: "Shooting Accuracy (%)"
-  }
-];
-
-const stats = [
-  {
-    number: 10,
-    firstName: "Asher",
-    lastName: "Goldfarb",
-    goals: 0,
-    assists: 1,
-    pim: 2,
-    sa: 7,
-    shots: 2
-  },
-  {
-    number: 11,
-    firstName: "Antoine",
-    lastName: "Mullen",
-    goals: 2,
-    assists: 1,
-    sa: 6,
-    shots: 5
-  },
-  {
-    number: 12,
-    firstName: "Ty",
-    lastName: "Thomas",
-    goals: 1,
-    assists: 2,
-    pim: 4,
-    sa: 5,
-    shots: 3
-  }
-];
+import formatDataListToSchema from '../../src/utilities';
  
 class App extends PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      playerStats: [],
+      goalieStats: []
+    };
+  }
+
+  componentDidMount() {
+    this.setState({
+      playerStats: formatDataListToSchema(GAME_STATS_SCHEMA.players, GAME_STATS.players),
+      goalieStats: formatDataListToSchema(GAME_STATS_SCHEMA.goalies, GAME_STATS.goalies)
+    });
+  }
   render() {
+    const { playerStats, goalieStats } = this.state;
+
     return (
-      <StatsList schema={schema} stats={stats} />
+      <div>
+        <h1>Game Stats</h1>
+        <h2>Player Stats</h2>
+        <StatsList schema={GAME_STATS_SCHEMA.players} stats={playerStats} />
+
+        <h2>Goalie Stats</h2>
+        <StatsList schema={GAME_STATS_SCHEMA.goalies} stats={goalieStats} />
+      </div>
     );
   }
 }
