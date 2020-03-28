@@ -96,7 +96,7 @@ const GAME_STATS_SCHEMA = {
     {
       id: "number",
       attribute: "number",
-      display: "Number"
+      display: "#"
     },
     {
       id: "name",
@@ -112,24 +112,24 @@ const GAME_STATS_SCHEMA = {
     {
       id: "goals",
       attribute: "goals",
-      display: "Goals"
+      display: "G"
     },
     {
       id: "assists",
       attribute: "assists",
-      display: "Assists"
+      display: "A"
     },
     {
       id: "points",
       attribute: {
         calculate: "${goals}+${assists}"
       },
-      display: "Points"
+      display: "P"
     },
     {
       id: "pim",
       attribute: "pim",
-      display: "Penalty Minutes"
+      display: "PIM"
     },
     {
       id: 'shots',
@@ -146,36 +146,36 @@ const GAME_STATS_SCHEMA = {
       attribute: {
         calculate: "(${goals}/${shots}*100).toFixed(2)"
       },
-      display: "Scoring Accuracy (%)"
+      display: "Scoring %"
     },
     {
       id: 'shootingAccuracy',
       attribute: {
         calculate: "(${shots}/${sa}*100).toFixed(2)"
       },
-      display: "Shoot Accuracy (%)"
+      display: "Shooting %"
     },
     {
       id: 'ppg',
       attribute: 'ppg',
-      display: "Power Play Goals"
+      display: "PPG"
     },
     {
       id: 'shg',
       attribute: 'shg',
-      display: "Short Handed Goals"
+      display: "SHG"
     },
     {
       id: 'gwg',
       attribute: 'gwg',
-      display: "Game Winning Goals"
+      display: "GWG"
     }
   ],
   goalies:[
     {
       id: "number",
       attribute: "number",
-      display: "Number"
+      display: "#"
     },
     {
       id: "name",
@@ -191,24 +191,24 @@ const GAME_STATS_SCHEMA = {
     {
       id: "min",
       attribute: "min",
-      display: "Minutes Played"
+      display: "MIN"
     },
     {
       id: "sog",
       attribute: "sog",
-      display: "Shots On Goal"
+      display: "SOG"
     },
     {
       id: "ga",
       attribute: "ga",
-      display: "Goals Against"
+      display: "GA"
     },
     {
       id: "gaa",
       attribute: {
         calculate: "(${ga}*60/${min}).toFixed(2)"
       },
-      display: "Goals Against Average"
+      display: "GAA"
     },
     {
       id: "sv",
@@ -220,7 +220,7 @@ const GAME_STATS_SCHEMA = {
       attribute: {
         calculate: "((1-${ga}/${sog})*100).toFixed(2)"
       },
-      display: "Save Percentage"
+      display: "Save %"
     },
     {
       id: 'so',
